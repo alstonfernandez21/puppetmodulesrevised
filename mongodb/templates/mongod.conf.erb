@@ -1,0 +1,17 @@
+fork = true
+<% if bind_ip != 'UNSET' %>
+bind_ip = <%= bind_ip %>
+<% end %>
+logpath=/data/log/mongodb/<%= mongodblogpath %>
+port=<%= port %>
+dbpath=<%= dbpath %>
+logappend = <%= logappend %>
+quiet	  = <%= quiet %>
+auth	  = <%= auth %>
+<% if replset != 'UNSET' %>
+replSet =  <%= replset %>
+<% end %>
+<% if replset != 'UNSET' %>
+keyFile = <%= keyfile %>
+<% end %>
+

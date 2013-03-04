@@ -1,0 +1,45 @@
+log_facility=daemon
+pid_file=/var/run/nrpe.pid
+server_port=5666
+#server_address=127.0.0.1
+nrpe_user=nagios
+nrpe_group=nagios
+allowed_hosts=<%= allowed_hosts %>
+dont_blame_nrpe=0
+# command_prefix=/usr/bin/sudo
+# DEBUGGING OPTION
+# # This option determines whether or not debugging messages are logged to the
+# # syslog facility.
+# # Values: 0=debugging off, 1=debugging on
+#
+# debug=0
+
+command_timeout=60
+connection_timeout=300
+
+command[check_users]=/usr/lib/nagios/plugins/check_users <%= check_users %>
+command[check_load]=/usr/lib/nagios/plugins/check_load <%= check_load %>
+command[check_root]=/usr/lib/nagios/plugins/check_disk <%= check_root %>
+command[check_swap]=/usr/lib/nagios/plugins/check_swap <%= check_swap %>
+command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs <%= check_zombie_procs %>
+command[check_total_procs]=/usr/lib/nagios/plugins/check_procs <%= check_total_procs %>
+<% if mysql_monitor == 'true' %>
+command[check_mysql]=/usr/lib/nagios/plugins/check_mysql -u test
+<% end %>
+<% if  redis_monitor == 'true' %>
+command[check_tcp_redis]=/usr/lib/nagios/plugins/check_tcp -p 6379
+<% end %>
+<% if memcached_monitor == 'true' %>
+command[check_tcp_memcached]=/usr/lib/nagios/plugins/check_tcp -p 11211
+<% end %>
+<% if mongodb_monitor == 'true' %>
+command[check_tcp_mongodb]=/usr/lib/nagios/plugins/check_tcp -p 27017
+<% end %>
+<% if http_monitor == 'true' %>
+command[check_tcp_http]=/usr/lib/nagios/plugins/check_tcp -p 80
+<% end %>
+<% if mysql_replmon  == 'true' %>
+command[check_mysql_repl]=/usr/lib/nagios/plugins/check_mysqld.pl -H localhost -f  -T  -v -s -r
+<% end %>
+
+

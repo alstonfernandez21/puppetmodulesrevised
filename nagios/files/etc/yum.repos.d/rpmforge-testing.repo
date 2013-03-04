@@ -1,0 +1,7 @@
+[rpmforge-testing]
+name = Red Hat Enterprise $releasever - RPMforge.net - test
+baseurl = http://apt.sw.be/redhat/el5/en/$basearch/test
+enabled = 0
+protect = 0
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-dag
+gpgcheck = 0

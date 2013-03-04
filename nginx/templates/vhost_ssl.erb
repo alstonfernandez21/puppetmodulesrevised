@@ -1,0 +1,38 @@
+server {
+    listen       <%= port %>;
+    server_name  <%= host %>  <%if serveraliases.is_a? Array -%>
+<% serveraliases.each do |host| -%><%= " #{host}\n" %>
+<% end -%>
+<% elsif serveraliases != '' -%>
+<%= " #{serveraliases}" -%>
+<% end -%>;
+	
+    access_log /data/log/<%= host %>.access.log main;
+    error_log  /data/log/<%= host %>.error.log;	
+   
+    ssl                  on;
+    ssl_certificate     <%= certfile %>;
+    ssl_certificate_key <%= certkeyfile %>;
+
+    ssl_session_timeout  5m;
+
+    ssl_protocols  SSLv2 SSLv3 TLSv1;
+    ssl_ciphers  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
+    ssl_prefer_server_ciphers   on;
+    
+    location / {
+        root   /data/web/<%= host %>;
+        index  index.html index.htm index.php;
+    }
+   
+     location ~ \.php {
+        root            html;
+        fastcgi_pass    127.0.0.1:9000;
+        fastcgi_index   index.php;
+        fastcgi_param   SCRIPT_FILENAME  /data/web/<%= host %>$fastcgi_script_name;
+        include         fastcgi_params;
+    }
+
+	
+}
+

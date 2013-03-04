@@ -1,0 +1,8 @@
+<Host name="<%= host %>" debug="<%= debug %>" autoDeploy="<%= autodeploy %>" appBase="<%= appbase %>" unpackWARs="<%= unpackwars %>">
+	        <% unless aliases.empty? %><% aliases.each do |a| %>         
+		<Alias><%= a %></Alias><% end %><% end %>
+		<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+                        prefix="<%= host %>__access_log." suffix=".log" timestamp="true"
+                        pattern="<%= pattern %>" resolveHosts="<%= resolvehosts %>"/>
+                <Context path="" docBase="/data/tomcat/webapps/<%= host %>" debug="<%= debug %>" reloadable="<%= reloadable %>"/>
+</Host>

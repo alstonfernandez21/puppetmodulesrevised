@@ -1,0 +1,103 @@
+daemonize yes
+pidfile /var/run/redis/redis.pid
+port <%= port %>
+bind <%= bind %>
+timeout <%= rtimeout %>
+loglevel <%= rloglevel %>
+logfile /data/log/redis/<%= logfile %>
+<% if syslog_enabled != 'UNSET' %>
+syslog-enabled <%= syslog_enabled %><% end %> 
+<% if syslog_indent != 'UNSET' %>
+syslog-ident <%= syslog_indent %><% end %>
+<% if syslog_facility  != 'UNSET' %>
+syslog-facility <%= syslog_facility %><% end %>
+
+
+databases <%= databases %>
+save 900 1
+save 300 10
+save 60 10000
+<% if rdbcompression != 'UNSET' %>
+rdbcompression <%= rdbcompression %><% end %>
+dbfilename <%= dbfilename %>
+<% if dir != 'UNSET' %>
+dir <%= dir %><% end %>
+<% if slaveof != 'UNSET' %>
+slaveof <%= slaveof  %><% end %>
+<% if masterauth  != 'UNSET' %>
+masterauth <%= masterauth %><% end %>
+slave-serve-stale-data yes
+<% if repl_ping_slave_period != 'UNSET' %>
+repl-ping-slave-period <%= repl_ping_slave_period %><% end %>
+<% if repl_timeout != 'UNSET' %>
+repl-timeout <%= repl_timeout %><% end %>
+<% if requirepass != 'UNSET' %>
+requirepass <%= requirepass %><% end %>
+<% if maxclients != 'UNSET' %>
+maxclients <%= maxclients  %><% end %>
+<% if maxmemory != 'UNSET' %>
+maxmemory <%= maxmemory %><% end %>
+<% if maxmemory_policy != 'UNSET' %>
+maxmemory-policy <% maxmemory_policy %><% end %>
+<% if maxmemory_samples != 'UNSET' %>
+maxmemory-samples <%= maxmemory-samples %><% end %>
+<% if appendonly != 'UNSET' %>
+appendonly <%= appendonly %><% end %>
+<% if appendfsync != 'UNSET' %>
+appendfsync <%= appendfsync %><% end %>
+<% if appendfilename != 'UNSET' %>
+appendfilename <%= appendfilename %><% end %>
+<% if no_appendfsync_on_rewrite != 'UNSET' %>
+no-appendfsync-on-rewrite <%= no_appendfsync_on_rewrite %><% end %>
+<% if auto_aof_rewrite_percentage != 'UNSET' %>
+auto-aof-rewrite-percentage <%= auto_aof_rewrite_percentage %><% end %>
+<% if auto_aof_rewrite_min_size != 'UNSET' %>
+auto-aof-rewrite-min-size <%= auto_aof_rewrite_min_size %><% end %>
+<% if slowlog_log_slower_than != 'UNSET' %>
+slowlog-log-slower-than <%= slowlog_log_slower_than %><% end %>
+<% if slowlog_max_len != 'UNSET' %>
+slowlog-max-len <%= slowlog_max_len %><% end %>
+<% if vm_enabled  != 'UNSET' %>
+vm-enabled <%= vm_enabled %><% end %>
+<% if vm_swap_file != 'UNSET' %>
+vm-swap-file <%= vm_swap_file %><% end %>
+<% if vm_max_memory != 'UNSET' %>
+vm-max-memory <%= vm_max_memory %><% end %>
+<% if vm_page_size != 'UNSET' %>
+vm-page-size <%= vm_page_size %><% end %>
+<% if vm_pages != 'UNSET' %>
+vm-pages <%= vm_pages %><% end %>
+<% if vm_max_threads != 'UNSET' %>
+vm-max-threads <%= vm_max_threads %><% end %>
+
+<% if hash_max_zipmap_entries		!= 'UNSET' %>
+hash-max-zipmap-entries <%= hash_max_zipmap_entries %><% end %>
+<% if hash_max_zipmap_value           != 'UNSET' %>
+hash-max-zipmap-value <%= hash_max_zipmap_value %><% end %>
+<% if list_max_ziplist_entries          != 'UNSET' %>
+list-max-ziplist-entries <%= list_max_ziplist_entries %><% end %>
+<% if list_max_ziplist_value          != 'UNSET' %>
+list-max-ziplist-value <%= list_max_ziplist_value %><% end %>
+<% if set_max_intset_entries          != 'UNSET' %>
+set-max-intset-entries <%= set_max_intset_entries %><% end %>
+<% if zset_max_ziplist_entries          != 'UNSET' %>
+zset-max-ziplist-entries <%= zset_max_ziplist_entries %><% end %>
+<% if zset_max_ziplist_value          != 'UNSET' %>
+zset-max-ziplist-value <%= zset_max_ziplist_value %><% end %>
+<% if activerehashing          != 'UNSET' %>
+activerehashing <%= activerehashing %><% end %>
+
+<% if stop_writes_on_bgsave_error   != 'UNSET' %>
+stop-writes-on-bgsave_error <%= stop_writes_on_bgsave_error %><% end %>
+<% if rdbchecksum   != 'UNSET' %>
+rdbchecksum <%= rdbchecksum  %><% end %>
+<% if slave_serve_stale_data  != 'UNSET' %>
+slave-serve-stale-data  <%= slave_serve_stale_data %><% end %>
+<% if  slave_read_only  != 'UNSET' %>
+slave-read-only <% end %>
+<% if lua_time_limit  != 'UNSET' %>
+lua-time-limit  <%= lua_time_limit %><% end %>
+
+<% unless client_output_buffer_limit.empty? %><% client_output_buffer_limit.each do |a| %>
+client_output_buffer_limit <%= a %><% end %><% end %>
+

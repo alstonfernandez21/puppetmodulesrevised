@@ -1,0 +1,43 @@
+NameVirtualHost *:<%= port %>
+<VirtualHost *:80>
+ServerName http://<%= host %>
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+</VirtualHost>
+
+
+<VirtualHost *:<%= port %>>
+ServerName https://<%= host %>
+<%if serveraliases.is_a? Array -%>
+<% serveraliases.each do |host| -%><%= " ServerAlias #{host}\n" %>
+<% end -%>
+<% elsif serveraliases != '' -%>
+<%= " ServerAlias #{serveraliases}" -%>
+<% end -%>
+
+DocumentRoot /data/web/<%= host %>
+<Directory /data/web/<%= host %>>
+Options Indexes FollowSymLinks MultiViews
+AllowOverride None
+Order allow,deny
+allow from all
+</Directory>
+
+SSLEngine On
+SSLCertificateFile <%= certfile %>
+SSLCertificateKeyFile <%= certkeyfile %>
+#<% if has_variable?("cacertfile") -%>
+#SSLCACertificateFile <%= cacertfile %>
+#<% end -%>
+#<% if has_variable?("cacrlfile") -%>
+#  SSLCARevocationFile <%= cacrlfile %>
+#<% end -%>
+#<% if has_variable?("certchainfile") -%>
+#  SSLCertificateChainFile <%= certchainfile %>
+#<% end -%>
+ErrorLog /data/log/<%= host %>_error.log
+LogLevel warn
+CustomLog /data/log/<%= host %>_access.log combined
+ServerSignature On
+</VirtualHost>

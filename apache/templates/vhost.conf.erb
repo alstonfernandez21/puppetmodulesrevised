@@ -1,0 +1,68 @@
+<% if port == '80' %><% else %>Listen <%= port %><% end %>
+<% if ssl_rewrite_all == true %>
+<VirtualHost  <% if listen == '*' %>*<% else %><%= listen %><% end %>:<%= port %>>
+ServerName http://<%= host %>
+
+<% if aliases.is_a? Array -%>
+<% aliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+<% elsif aliases != '' -%>
+<%= "  ServerAlias #{aliases}" %>
+<% end -%>
+
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+</VirtualHost>
+<% end %>
+<VirtualHost  <% if listen == '*' %>*<% else %><%= listen %><% end %>:<% if ssl  == true %>443<% else %><%= port %><% end %>>
+ServerName <% if ssl_rewrite_all == true %>https://<%= host %><% else %><%= host %><% end %>
+<% if serveradmin %>
+ServerAdmin <%= serveradmin %>
+<% end %>
+<% if aliases.is_a? Array -%>
+<% aliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+<% elsif aliases != '' -%>
+<%= "  ServerAlias #{aliases}" %>
+<% end -%>
+
+<% if proxy == true %>
+  ProxyRequests Off
+  <Proxy *>
+    Order deny,allow
+    Allow from all
+  </Proxy>
+<% end %>
+
+<% for uri in dont_proxy %>	
+ ProxyPass	<%= uri %> !
+<% end %>
+<% if proxy == true %>
+ ProxyPass	  / <%= dest %>/
+ ProxyPassReverse / <%= dest %>/
+ ProxyPreserveHost On
+<% end %>
+
+<% if proxy == true %><% else %>
+DocumentRoot /data/web/<%= host %>
+<Directory /data/web/<%= host %>> <% unless directory_index.empty? %>
+	DirectoryIndex <%= directory_index %><% end %>	
+	Options Indexes FollowSymLinks MultiViews
+	AllowOverride <%= override %>
+	Order allow,deny
+	allow from all
+</Directory>
+<% end %>
+
+<% if ssl  == true %>
+SSLEngine On
+SSLCipherSuite SSLv2:-LOW:EXPORT:RC4+RSA
+SSLCertificateFile /data/ssl/<%= host %>.crt
+SSLCertificateKeyFile /data/ssl/<%= host %>.key
+<% end %>
+
+ErrorLog /data/log/<%= host %>_error.log
+LogLevel warn
+CustomLog /data/log/<%= host %>_access.log combined
+ServerSignature On
+</VirtualHost>

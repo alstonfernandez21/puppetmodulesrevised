@@ -1,0 +1,112 @@
+[mysqld]
+datadir=<%= datadir %>
+socket=<%= socket %>
+
+
+<% if auto_increment_offset != 'UNSET' %>
+auto-increment-offset=<%= auto_increment_offset %><% end %>
+<% if auto_increment_increment != 'UNSET'%>
+auto-increment-increment=<%= auto_increment_increment %><% end %>
+
+<% if log_bin != 'UNSET' %>
+log-bin=<%= log_bin %><% end %>
+<% if log_bin_index != 'UNSET' %>
+log-bin-index=<%= log_bin_index %><% end %>
+
+<% if bind_address != 'UNSET' %>
+bind-address    = <%= bind_address %>
+<% end %> 
+<% if default_engine != 'UNSET' %>
+default-storage-engine = <%= default_engine %>
+<% end %>
+user=<%= user %>
+old_passwords=1
+<% if default_charset != 'UNSET' %>
+default-character-set=<%= default_charset %>
+character-set-server=<%= default_charset %>
+<% end %>
+
+
+<% unless binlog_do_db.empty? %><% binlog_do_db.each do |a| %> 
+binlog-do-db=<%= a %><% end %><% end %>
+<% unless binlog_ignore_db.empty? %><% binlog_ignore_db.each do |a| %> 
+binlog-ignore-db=<%= a %><% end %><% end %>
+
+
+<% if server_id != 'UNSET' %>
+server-id=<%= server_id %>
+<% end %>
+
+<% if master_host != 'UNSET' %>
+master_host=<%= master_host %><% end %>
+<% if master_user != 'UNSET' %>
+master_user=<%= master_user %><% end %>
+<% if master_password != 'UNSET' %>
+master_password=<%= master_password %><% end %>
+<% if master_port != 'UNSET' %>
+master_port=<%= master_port %><% end %>
+<% unless replicate_do_db.empty? %><% replicate_do_db.each do |a| %> 
+replicate-do-db=<%= a %><% end %>
+<% end %>
+<% unless relay_log.empty? %><% relay_log.each do |a| %>
+relay-log=<%= a %><% end %>
+<% end %>
+<% unless relay_log_index.empty? %><% relay_log_index.each do |a| %>
+relay-log-index=<%= a %><% end %>
+<% end %>
+<% unless relay_log_info_file.empty? %><% relay_log_info_file.each do |a| %>
+relay-log-info-file=<%= relay_log_info_file %><% end %>;
+<% end %>
+<% unless master_info_file.empty? %><% master_info_file.each do |a| %>
+master-info-file=<%= master_info_file %><% end %>;
+<% end %>
+ 
+
+
+<% if ssl == true %>
+ssl-ca    = <%= ssl_ca %>
+ssl-cert  = <%= ssl_cert %>
+ssl-key   = <%= ssl_key %>
+<% end %>
+
+<% if max_allowed_packet != 'UNSET' %>
+max_allowed_packet = <%= max_allowed_packet %>
+<% end %>
+
+
+<% if key_buffer != 'UNSET' %>
+key_buffer = <%= key_buffer %><% end %>
+<% if sort_buffer_size != 'UNSET' %>
+sort_buffer_size = <%= sort_buffer_size %><% end %>
+<% if read_buffer != 'UNSET' %>
+read_buffer = <%= read_buffer %><% end %>
+<% if write_buffer != 'UNSET' %>
+write_buffer =  <%= write_buffer %><% end %>
+
+
+<% if key_buffer != 'UNSET' %>
+key_buffer = <%= key_buffer %><% end %>
+<% if sort_buffer_size != 'UNSET' %>
+sort_buffer_size = <%= sort_buffer_size %><% end %>
+<% if read_buffer != 'UNSET' %>
+read_buffer = <%= read_buffer %><% end %>
+<% if write_buffer != 'UNSET' %>
+write_buffer = <%= write_buffer %><% end %>
+
+
+<% if interactive_timeout != 'UNSET' %>
+interactive-timeout
+<% end %>
+
+[mysqld_safe]
+log-error=<%= log_error %>
+pid-file=<%= pidfile %>
+<% if  open_files_limit != 'UNSET' %>
+open-files-limit = <%= open_files_limit %>
+<% end %> 
+
+<% if mysql_root_pw != 'UNSET' %>
+[client]
+password=<%= mysql_root_pw %>
+<% end %>
+

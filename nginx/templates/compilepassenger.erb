@@ -1,0 +1,4 @@
+#!/bin/sh
+source /usr/local/rvm/environments/<%= rvm_ruby_version %>
+/usr/local/rvm/gems/<%= rvm_ruby_version %>/bin/passenger-install-nginx-module  --auto --auto-download --prefix=/opt/nginx
+
