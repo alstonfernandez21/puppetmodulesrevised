@@ -114,7 +114,7 @@ class nagiostarget (
         case $operatingsystem {
             default: {
                 package {
-                "nagios-nrpe":          ensure => present;
+                #"nagios-nrpe":          ensure => present;
                 "nagios-plugins-all":   ensure => present;
                 "nagios-plugins-nrpe":  ensure => present;
                 }

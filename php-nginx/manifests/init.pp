@@ -4,7 +4,7 @@ class php-nginx {
                 before => Package["spawn-fcgi"],
         }
         package { "php53-mysql":
-                require => Package["mysql"],
+            #    require => Package["mysql"],
         }
 
 
@@ -24,10 +24,11 @@ class php-nginx {
                 before  => Service["php_cgi"],
         }
 
-        service { "php_cgi":
-                ensure    => 'running',
-                require   => Package["spawn-fcgi"],
-		hasstatus => false,
-        }
+        #service { "php_cgi":
+        #        ensure    => 'running',
+        #        require   => Package["spawn-fcgi"],
+	#	hasstatus => false,
+        #}
 
+	include php-nginx::service 
 }
