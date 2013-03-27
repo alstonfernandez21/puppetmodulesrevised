@@ -18,5 +18,3 @@ Puppet::Type.type(:repo).provide(:svn) do
 	 File.directory? resource[:path]
 	end
 end
-
-

@@ -31,7 +31,7 @@ define nginx::vhost (
   file {"/etc/nginx/conf.d/${host}.conf":
         owner   => "root",
         group   => "root",
-        mode    => 0770,
+        mode    => 0750,
         content => template("nginx/vhost.conf.erb"),
         notify => Service["nginx"],
   	require    => Package["nginx"],

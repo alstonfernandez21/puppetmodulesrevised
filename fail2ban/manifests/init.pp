@@ -1,4 +1,8 @@
-class fail2ban {
+class fail2ban ( 
+		$host = '',
+		$email = 'alston.fernandez@gmail.com',
+
+		){
 
 package { "fail2ban":
 	before 	=> [	File["/etc/fail2ban/filter.d/sshd.conf"], 
@@ -18,7 +22,8 @@ file { "/etc/fail2ban/jail.local":
         mode    => "0750",
         owner   => "root",
         group   => "root",
-        source  => 'puppet:///modules/fail2ban/jail.local',
+        content => template("fail2ban/jail.local.erb"),
+	# source  => 'puppet:///modules/fail2ban/jail.local',
 	before  => File["/etc/fail2ban/filter.d/sshd.conf"],
 	notify => Service["fail2ban"],
         }
