@@ -90,7 +90,7 @@ exec { "install_rvm":
                 ensure  => present,
                 user    => rtsadmin,
                 type    => "ssh-dss",
-                key     => "AAAAB3NzaC1kc3MAAACBAMSyWse30JQiioKZyBNkD+rOc0HRqsAZlgFM9ou1gy/CyMaQOSf9cNpLnKy8jgqOrS2/tqfeFeYy2R3Eg9qhfZSCq1mokXYW2ornIWUkXFF7K7lhesYhgWtwKPRm8avz+MWXagKSj93YYTEF4r8ctzf6+t0x0xETC5mneK9vh0NvAAAAFQDoiSq5QMAjXocnGl5gWjK80rR5rQAAAIBQpKBoIfJARc1kKUwcEWo6UowPtVcAVl/jtbFic3Kh573ZeETruGcWJ6SHOtVTvdI2wrabBdOaFk44DmQNEoB9MPVPEJ/8M1MA5imsB+8sFLJbweJNH/Ht0dKvmjgm1q12R5hzaopL84ncLuKrI0oFdL7f/1UcA1qMzdCo7ZfHvQAAAIAqY9bYtbVk9NmJNsTelaSxU1aLNThalHDmG9BF+type2MjUn4UK3h6oH+Iov7Q6oVVLhrFTML0pvOaMlCe5MLXDPhqndxXz1wHwk9VHHPFSnSvSWOO/R+PYXUvWHiKTHyvFv7ZYz2ANmEv9W4c4UElT3fv/LjyVM/pIC7SoZqz7A== rtsadmin@domU2.rts.lan";
+                key     => "BLAA";
 }
 
 
