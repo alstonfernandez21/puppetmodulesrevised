@@ -34,26 +34,50 @@ exec { "install_rvm":
     #unless   => "ls /usr/local/rvm/bin/rvm",
     }
    
- file { [ "/data", "/data/log",
-         "/data/web", "/data/backup", 
-	"/data/rails", ]:
+ file { [ "/data", ]:
     	owner => "root",
+	group => "root",
     	ensure => "directory",
-    	mode   => 0765,
+    	mode   => 0760,
  }
+ 
+ file { [ "/data/web", "/data/rails", ]:
+	owner => "root",
+	group => "root",
+	ensure => "directory",
+	mode => "0660",
+	require => File["/data"],
+ }
+
 
  file { "/data/ssl":
 	owner => "root",
 	group => "root",
 	ensure => "directory",
-	mode   => 0750,
+	mode   => 0650,
  }
 
+ file { [ "/data/log", "/data/backup", ]:
+	owner => "root",
+	group => "root",
+	ensure => "directory",
+	mode => 0650,
+	require => File["/data"],
+ }
+	
  file { [ "/data/backup/mysql", "/data/backup/mongodb", "/data/backup/redis", ]:
     	owner => "root",
     	ensure => "directory",
-    	mode   => 0665,
+    	mode   => 0650,
 	require => File["/data/backup"],
+ }
+
+ file { ["/data/log/mysql"]:
+	owner => "root",
+	group => "mysql",
+	mode => "0660",
+	ensure => "directory",
+	require => File["/data/log"],
  }
 
  user { "deploy":

@@ -8,6 +8,14 @@ auto-increment-offset=<%= auto_increment_offset %><% end %>
 <% if auto_increment_increment != 'UNSET'%>
 auto-increment-increment=<%= auto_increment_increment %><% end %>
 
+<% if log_slow_queries != 'UNSET' %>
+long_query_time = <%= long_query_time %>
+#THE LOG WILL BE IN THE /data/mysql FOLDER
+#BUNCH OF RETARDED BUGS WITH 5.0 that wont write to the log file 
+#http://www.electrictoolbox.com/logging-queries-with-mysql/
+log-slow-queries = mysql.slow.log
+<% end %>
+
 <% if log_bin != 'UNSET' %>
 log-bin=<%= log_bin %><% end %>
 <% if log_bin_index != 'UNSET' %>
