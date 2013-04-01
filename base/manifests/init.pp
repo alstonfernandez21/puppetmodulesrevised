@@ -61,21 +61,21 @@ exec { "install_rvm":
 	owner => "root",
 	group => "root",
 	ensure => "directory",
-	mode => 0660,
+	mode => 0664,
 	require => File["/data"],
  }
 	
  file { [ "/data/backup/mysql", "/data/backup/mongodb", "/data/backup/redis", ]:
     	owner => "root",
     	ensure => "directory",
-    	mode   => 0650,
+    	mode   => 0664,
 	require => File["/data/backup"],
  }
 
  file { ["/data/log/mysql"]:
 	owner => "root",
 	group => "mysql",
-	mode => "0660",
+	mode => "0664",
 	ensure => "directory",
 	require => File["/data/log"],
  }
