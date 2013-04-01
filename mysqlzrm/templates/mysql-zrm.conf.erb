@@ -1,0 +1,11 @@
+backup-level=<%= backup_level %>
+backup-mode=<%= backup_mode %>
+backup-type=<%= backup_type %>
+destination=<%= destination %>
+retention-policy=<%= retention %>
+compress=<%= compress %>
+databases=<% databases.each do |db| %><%= db %> <% end %>
+user="<%= user %>"
+password="<%= password %>"
+host="<%= host %>"
+mailto="<%= mailto %>"
