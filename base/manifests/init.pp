@@ -38,7 +38,7 @@ exec { "install_rvm":
     	owner => "root",
 	group => "root",
     	ensure => "directory",
-    	mode   => 0760,
+    	mode   => 0764,
  }
  
  file { [ "/data/web", "/data/rails", ]:
@@ -61,7 +61,7 @@ exec { "install_rvm":
 	owner => "root",
 	group => "root",
 	ensure => "directory",
-	mode => 0650,
+	mode => 0660,
 	require => File["/data"],
  }
 	
