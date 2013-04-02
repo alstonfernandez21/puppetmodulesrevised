@@ -4,6 +4,8 @@
 
 #CREATE A BACKUP USER
 #GRANT ALL ON *.* TO 'backup_user'@'localhost' IDENTIFIED BY 'backup_pass';
+
+# Main configuration for MySQL-ZRM
 class {'mysql-zrm':
          retention    => "7D",
          databases    => ["database1", "database2", ],
@@ -11,6 +13,8 @@ class {'mysql-zrm':
          password     => "back_pass",
          mailto       => "dbadmin@email.com",
 }
+
+include mysql-zrm
 
 
 # ADD A BACKUP JOB
