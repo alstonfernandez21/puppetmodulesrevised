@@ -1,0 +1,38 @@
+
+
+
+
+#CREATE A BACKUP USER
+#GRANT ALL ON *.* TO 'backup_user'@'localhost' IDENTIFIED BY 'backup_pass';
+class {'mysql-zrm':
+         retention    => "7D",
+         databases    => ["database1", "database2", ],
+         user         => "backup_user",
+         password     => "back_pass",
+         mailto       => "dbadmin@email.com",
+}
+
+
+# ADD A BACKUP JOB
+mysqlzrm {"backupdb1":
+		#daily or weekly
+        interval => "daily",
+		#backup set name
+        backupset => "dailyrun",
+		#time in 24 hour format
+        time    => "13:30",
+		# 0 for full backup 1 for incremental | note you need binary logging enabled for incremental to work
+        backuplevel => 0,
+        ensure  => absent,
+}
+
+
+# REMOVE A BACKUP JOB
+mysqlzrm {"backupdb1":
+        interval => "daily",
+        backupset => "dailyrun",
+        time    => "13:30",
+        backuplevel => 0,
+        ensure  => absent,
+}
+
