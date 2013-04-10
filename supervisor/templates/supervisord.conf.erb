@@ -3,7 +3,7 @@ file=/var/run/supervisor.sock   ; (the path to the socket file)
 
 <% if enable_inet_server -%>
 [inet_http_server]
-port=<%= inet_server_port %>
+port=<%= ipaddress %>:9001
 <% if @inet_server_user && @inet_server_pass -%>
 user=<%= inet_server_user %>
 pass=<%= inet_server_pass %>
